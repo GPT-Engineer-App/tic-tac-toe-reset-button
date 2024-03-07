@@ -28,7 +28,7 @@ const Index = () => {
   const renderCell = (index) => {
     return (
       <GridItem w="100%" h="100%">
-        <Button h="100%" w="100%" onClick={() => handleClick(index)} fontSize="3xl" variant="outline">
+        <Button h="100px" w="100px" onClick={() => handleClick(index)} fontSize="3xl" variant="outline">
           {board[index]}
         </Button>
       </GridItem>
