@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, GridItem, Text, useToast, VStack, Icon } from "@chakra-ui/react";
+import { Button, Grid, GridItem, Text, useToast, VStack, Icon, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from "@chakra-ui/react";
 import { FaTrash } from "react-icons/fa";
 
 const Index = () => {
-  // Game state
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const winner = calculateWinner(board);
   const toast = useToast();
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   // Reset game handler
   const resetGame = () => {
@@ -71,6 +75,19 @@ const Index = () => {
 
   return (
     <VStack spacing={4}>
+      <Modal isOpen={isModalOpen} onClose={toggleModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>{}</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={toggleModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <Text fontSize="2xl">{winner ? `Winner: ${winner}` : `Next player: ${isXNext ? "X" : "O"}`}</Text>
       <Grid templateColumns="repeat(3, 1fr)" gap={2}>
         {Array(9)
